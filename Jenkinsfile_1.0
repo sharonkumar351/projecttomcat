@@ -5,8 +5,8 @@ pipeline {
         maven 'maven3'
     }
     parameters {
-         string(name: 'tomcat_stag', defaultValue: '13.59.108.184', description: 'Node1-Remote Staging Server')
-         string(name: 'tomcat_prod', defaultValue: '18.219.228.98', description: 'Node2-Remote Production Server')
+         string(name: 'tomcat_stag', defaultValue: ' 16.171.25.9', description: 'Node1-Remote Staging Server')
+         string(name: 'tomcat_prod', defaultValue: '13.48.24.143', description: 'Node2-Remote Production Server')
     }
 
     triggers {
@@ -30,13 +30,13 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "scp **/*.war jenkins@${params.tomcat_stag}:/usr/share/tomcat/webapps/"
+                        sh "scp **/*.war jenkins@${params.tomcat_stag}:"/opt/tomcat/apache-tomcat-9.0.84/webapps/"
                     }
                 }
 
                 stage ("Deploy to Production"){
                     steps {
-                        sh "scp **/*.war jenkins@${params.tomcat_prod}:/usr/share/tomcat/webapps/"
+                        sh "scp **/*.war jenkins@${params.tomcat_prod}:"/opt/tomcat/apache-tomcat-9.0.84/webapps/"
                     }
                 }
             }
